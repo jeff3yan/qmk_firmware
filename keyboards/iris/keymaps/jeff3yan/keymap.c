@@ -43,10 +43,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
      LSFT, A  , S  , D  , F  , G  ,                H  , J  , K  , L  ,SCLN,QUOT,
   //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-     LCTL, Z  , X  , C  , V  , B  ,LOWR,     RASE, N  , M  ,COMM,DOT ,SLSH,MINS,
+     LCTL, Z  , X  , C  , V  , B  ,LOWR,     LGUI, N  , M  ,COMM,DOT ,SLSH,MINS,
   //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
-                       LEFT,SPC ,LALT,         ENT ,LGUI,RGHT
-  //                  `----+----+----'        `----+----+----'
+                       LEFT,SPC ,LALT,         ENT ,RASE,EQL
+  //                  `----+----+----'        `----+----+----                               '
   ),
 
   [_LOWER] = LAYOUT_kc(
@@ -57,7 +57,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
      DEL ,    ,LEFT,RGHT, UP ,    ,                   , P4 , P5 , P6 ,LBRC,RBRC,
   //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-     BL_S,    ,    ,    ,DOWN,    ,    ,     RPRN,    , P1 , P2 , P3 ,MINS,    ,
+     BL_S,    ,    ,    ,DOWN,    ,    ,     RPRN,    , P1 , P2 , P3 ,    ,EQL ,
   //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
                            ,LPRN,DEL ,         DEL ,    , P0
   //                  `----+----+----'        `----+----+----'
@@ -67,9 +67,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
      F12 , F1 , F2 , F3 , F4 , F5 ,                F6 , F7 , F8 , F9 ,F10 ,F11 ,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-         ,EXLM,UP  ,HASH,DLR ,PERC,               CIRC,AMPR,ASTR,LPRN,RPRN,    ,
+         ,EXLM,UP  ,HASH,DLR ,PERC,               CIRC,AMPR,UP  ,LPRN,RPRN,    ,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-         ,LEFT,DOWN,RIGHT,PGUP,UNDS,               EQL ,HOME,    ,    ,    ,BSLS,
+         ,LEFT,DOWN,RIGHT,PGUP,UNDS,               EQL ,LEFT,DOWN,RGHT,    ,BSLS,
   //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
      MUTE,MSTP,MPLY,VOLD,PGDN,MINS,    ,         ,PLUS,END ,    ,    ,    ,    ,
   //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
