@@ -14,6 +14,8 @@ enum custom_keycodes {
   LOWER,
   RAISE,
   ADJUST,
+  SHIFTHOME,
+  SHIFTEND
 };
 
 #define KC_ KC_TRNS
@@ -32,6 +34,9 @@ enum custom_keycodes {
 #define KC_RSAD RGB_SAD
 #define KC_RVAI RGB_VAI
 #define KC_RVAD RGB_VAD
+#define KC_LHOM SHIFTHOME
+#define KC_LEND SHIFTEND
+#define PREVENT_STUCK_MODIFIERS
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -43,9 +48,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
      LSFT, A  , S  , D  , F  , G  ,                H  , J  , K  , L  ,SCLN,QUOT,
   //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-     LCTL, Z  , X  , C  , V  , B  ,LOWR,     LGUI, N  , M  ,COMM,DOT ,SLSH,MINS,
+     LCTL, Z  , X  , C  , V  , B  ,LOWR,     GRV, N  , M  ,COMM,DOT ,SLSH,MINS,
   //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
-                       LEFT,SPC ,LALT,         ENT ,RASE,EQL
+                       LALT,SPC ,LGUI,         ENT ,RASE,EQL
   //                  `----+----+----'        `----+----+----                               '
   ),
 
@@ -53,13 +58,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
      TILD,EXLM, AT ,HASH,DLR ,PERC,               CIRC,AMPR,ASTR,LPRN,RPRN,MINS,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-     RST , 1  , 2  , 3  , 4  , 5  ,                6  , 7  ,PLUS,PIPE,LCBR,RCBR,
+     RST , 1  , 2  , 3  , 4  , 5  ,                6  , 7  ,PLUS,    ,LCBR,RCBR,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
      DEL ,    ,LEFT,RGHT, UP ,    ,                   , P4 , P5 , P6 ,LBRC,RBRC,
   //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-     BL_S,    ,    ,    ,DOWN,    ,    ,     RPRN,    , P1 , P2 , P3 ,    ,EQL ,
+     LCTL,    ,    ,    ,DOWN,    ,    ,     RPRN,    , P1 , P2 , P3 ,BSLS,PIPE,
   //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
-                           ,LPRN,DEL ,         DEL ,    , P0
+                       LALT,LPRN,LGUI,         DEL ,    , P0
   //                  `----+----+----'        `----+----+----'
   ),
 
@@ -67,11 +72,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
      F12 , F1 , F2 , F3 , F4 , F5 ,                F6 , F7 , F8 , F9 ,F10 ,F11 ,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-         ,EXLM,UP  ,HASH,DLR ,PERC,               CIRC,AMPR,UP  ,LPRN,RPRN,    ,
+         ,EXLM,UP  ,HASH,DLR ,PERC,               CIRC,HOME,UP  ,END ,RPRN,    ,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-         ,LEFT,DOWN,RIGHT,PGUP,UNDS,               EQL ,LEFT,DOWN,RGHT,    ,BSLS,
+         ,LEFT,DOWN,RIGHT,PSCR,UNDS,               EQL ,LEFT,DOWN,RGHT,    ,BSLS,
   //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-     MUTE,MSTP,MPLY,VOLD,PGDN,MINS,    ,         ,PLUS,END ,    ,    ,    ,    ,
+     LCTL,MSTP,MPLY,VOLD,PGDN,MINS,    ,         ,HOME,LHOM,    ,LEND,    ,    ,
   //`----+----+----+--+-+----+----+----/    \----+----+----+----+----+----+----'
                            ,    ,    ,             ,    ,
   //                  `----+----+----'        `----+----+----'
@@ -133,6 +138,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         layer_off(_ADJUST);
       }
       return false;
+      break;
+    case SHIFTHOME:
+      if (record->event.pressed) {
+        SEND_STRING(SS_LSFT(SS_TAP(X_HOME)));
+        return false;
+      }
+      break;
+    case SHIFTEND:
+      if (record->event.pressed) {
+        SEND_STRING(SS_LSFT(SS_TAP(X_END)));
+        return false;
+      }
       break;
   }
   return true;
